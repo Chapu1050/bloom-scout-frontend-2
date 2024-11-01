@@ -2,9 +2,12 @@ import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 
 import { useUserStore } from "@/stores/user";
-import HomeView from "../views/HomeView.vue";
+import FriendingComponent from "../components/friending/FriendingComponent.vue";
 import LoginView from "../views/LoginView.vue";
+import MapView from "../views/MapView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import ObservationView from "../views/ObservationListView.vue"; // Import the ObservationView
+import PostObservationView from "../views/PostObservationView.vue";
 import SettingView from "../views/SettingView.vue";
 
 const router = createRouter({
@@ -13,13 +16,37 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      component: HomeView,
+      component: MapView,
     },
     {
       path: "/setting",
       name: "Settings",
       component: SettingView,
       meta: { requiresAuth: true },
+    },
+    {
+      path: "/post-observation",
+      name: "PostObservation",
+      component: PostObservationView,
+      meta: { requiresAuth: true }, // Require auth
+    },
+    {
+      path: "/map", // Define the path for the map component
+      name: "Map",
+      component: MapView,
+      meta: { requiresAuth: false }, // Set requiresAuth to true or false as needed
+    },
+    {
+      path: "/observations", // Add the route for the ObservationView
+      name: "Observations",
+      component: ObservationView,
+      meta: { requiresAuth: true }, // Require auth for viewing observations
+    },
+    {
+      path: "/friends", // Add the route for the ObservationView
+      name: "Friends",
+      component: FriendingComponent,
+      meta: { requiresAuth: true }, // Require auth for viewing observations
     },
     {
       path: "/login",
